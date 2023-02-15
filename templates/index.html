@@ -1,21 +1,30 @@
 <!DOCTYPE html>
-<head>
-  <title>OpenAI Quickstart</title>
-  <link
-    rel="shortcut icon"
-    href="{{ url_for('static', filename='dog.png') }}"
-  />
-  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}" />
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="static/style.css">
+    <title>Chatbot</title>
 </head>
-
-<body>
-  <img src="{{ url_for('static', filename='dog.png') }}" class="icon" />
-  <h3>Name my pet</h3>
-  <form action="/" method="post">
-    <input type="text" name="animal" placeholder="Enter an animal" required />
-    <input type="submit" value="Generate names" />
-  </form>
-  {% if result %}
-  <div class="result">{{ result }}</div>
-  {% endif %}
-</body>
+  <body>
+    <div class="chat-container">
+      <div class="chat-history" style="max-height: 650px; overflow-y: scroll;">
+        {% for message in messages[-30:] %}
+            {% if loop.index % 2 == 0 %}
+            <div class="chat-message">
+                <p>{{ message }}</p>
+            </div>
+            {% else %}
+            <div class="chat-message user-message">
+                <p>{{ message }}</p>
+            </div>
+            {% endif %}
+        {% endfor %}
+      </div>
+      <form action="/" method="post">
+        <input type="text" name="message" placeholder="Type your message here...">
+        <input type="submit" value="Send">
+      </form>
+    </div>
+  </body>
+</html>

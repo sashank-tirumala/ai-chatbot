@@ -1,0 +1,25 @@
+{
+    "Undergraduate Degree Information":{
+        context:
+        '''
+        Sashank did his undergraduate in IIT Madras from 2016 to 2021. 
+        He majored in Engineering Design for his bachelors of technology and in Robotics for his Masters of Technology.
+        Sashank received a joint bachelors of technology and masters of technology from IIT Madras. 
+        Sashank wrote IITJEE examination to get into IIT Madras. 
+        He obtained an all india rank of 1364, in the top 1% of all aspirants. 
+        Sashank had a final GPA of 9.0/10.0 from his undergrad and graduated in the top 1% of all students.
+        '''
+        embeddings: 0
+        
+    }
+    "Personal Information":{
+        context:
+        '''
+        Sashank was born in Ranchi Jharkhand on September 15th 1998. Sashank stayed in Ranchi for a year. Sashank then moved to Delhi and 
+        stayed there for 2 years. Sashank then moved to Bangalore and stayed there for 5 years. Sashank then moved to Hyderabad and stayed
+        there for 10 years. Sashank's father name is Seshu Kumar Tirumala. Sashank's mother name is Krishna Priya Tirumala.
+        '''
+        embeddings: 0
+        
+    }
+}

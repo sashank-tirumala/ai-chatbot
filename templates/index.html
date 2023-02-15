@@ -1,30 +1,52 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="static/style.css">
-    <title>Chatbot</title>
+<head>
+	<title>Flask Chatbot</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
-  <body>
-    <div class="chat-container">
-      <div class="chat-history" style="max-height: 650px; overflow-y: scroll;">
-        {% for message in messages[-30:] %}
-            {% if loop.index % 2 == 0 %}
-            <div class="chat-message">
-                <p>{{ message }}</p>
-            </div>
-            {% else %}
-            <div class="chat-message user-message">
-                <p>{{ message }}</p>
-            </div>
-            {% endif %}
-        {% endfor %}
-      </div>
-      <form action="/" method="post">
-        <input type="text" name="message" placeholder="Type your message here...">
-        <input type="submit" value="Send">
-      </form>
-    </div>
-  </body>
+<body>
+	<div class="chat-container">
+		<div class="chat-history" id="chat-history">
+			<!-- messages will be added here dynamically -->
+		</div>
+		<div class="chat-input">
+			<form id="chat-form" method="POST">
+				<input type="text" name="user_input" id="user-input" placeholder="Type your message here...">
+				<input type="submit" value="Send">
+			</form>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			// handle form submission
+			$('#chat-form').submit(function(e) {
+				e.preventDefault();
+				var user_input = $('#user-input').val().trim();
+				if (user_input !== '') {
+					// add user message to chat history
+					$('#chat-history').append('<div class="chat-message user-message">' + user_input + '</div>');
+					// clear user input
+					$('#user-input').val('');
+					// scroll chat history to the bottom
+					$('#chat-history').scrollTop($('#chat-history')[0].scrollHeight);
+					// send user input to server
+					$.post({
+						url: '{{ url_for("chatbot") }}',
+						data: {
+							user_input: user_input
+						},
+						success: function(response) {
+							// add chatbot response to chat history
+							$('#chat-history').append('<div class="chat-message chatbot-message">' + response + '</div>');
+							// scroll chat history to the bottom
+							$('#chat-history').scrollTop($('#chat-history')[0].scrollHeight);
+						}
+					});
+				}
+			});
+		});
+	</script>
+</body>
 </html>

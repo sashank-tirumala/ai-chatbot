@@ -1,18 +1,20 @@
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
-chat_history = []
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/chatbot', methods=['POST'])
 def chatbot():
-    if request.method == 'POST':
-        message = request.form['message']
-        chat_history.append(message)
-        response = "Hello"
-        chat_history.append(response)
-        return render_template('index.html', messages=chat_history)
-    else:
-        return render_template('index.html', messages=chat_history)
+    # Get user input
+    user_input = request.form['user_input']
+
+    # Generate chatbot response
+    chatbot_response = 'Hi'
+
+    return chatbot_response
 
 if __name__ == '__main__':
     app.run(debug=True)

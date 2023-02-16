@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Flask Chatbot</title>
+	<title>Tirumala Chatbot</title>
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
+<h1 style="color:black; text-align: center">Tirumala Chatbot</h1>
+
 <body>
 	<div class="chat-container">
 		<div class="chat-history" id="chat-history">
@@ -39,7 +41,11 @@
 						},
 						success: function(response) {
 							// add chatbot response to chat history
-							$('#chat-history').append('<div class="chat-message chatbot-message">' + response + '</div>');
+                            buttons = "<div class=\"message-action\">"+
+                            "<button class=\"downvote-button\" aria-label=\"Downvote\"><span>&#x1F44E;</span></button>"+
+                            "<button class=\"upvote-button\" aria-label=\"Upvote\"><span>&#x1F44D;</span></button>"+
+                            "</div>"
+							$('#chat-history').append('<div class="chat-message chatbot-message">' + response + buttons + '</div>');
 							// scroll chat history to the bottom
 							$('#chat-history').scrollTop($('#chat-history')[0].scrollHeight);
 						}

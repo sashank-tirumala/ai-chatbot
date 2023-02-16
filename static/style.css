@@ -73,3 +73,25 @@ input[type=submit]:hover {
     background-color: #f2f2f2;
     border-radius: 1vw;
 }
+
+.upvote-button, .downvote-button {
+    background-color: transparent;
+    /* border: box; */
+    cursor: pointer;
+    font-size: 0.5rem;
+    margin-right: 10px;
+    float: right;
+    margin-top: -20px;
+    /* position: absolute;
+    top: 50%; */
+}
+
+.upvote-button span, .downvote-button span {
+    display: block;
+    font-size: 0.75rem;
+}
+
+.upvote-button:hover span, .downvote-button:hover span {
+    color: blue;
+
+}

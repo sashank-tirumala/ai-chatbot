@@ -42,12 +42,26 @@
 						success: function(response) {
 							// add chatbot response to chat history
                             buttons = "<div class=\"message-action\">"+
-                            "<button class=\"downvote-button\" aria-label=\"Downvote\"><span>&#x1F44E;</span></button>"+
-                            "<button class=\"upvote-button\" aria-label=\"Upvote\"><span>&#x1F44D;</span></button>"+
+                            "<button class=\"downvote-button\" aria-label=\"Downvote\", value=\"downvote\"><span>&#x1F44E;</span></button>"+
+                            "<button class=\"upvote-button\" aria-label=\"Upvote\" value=\"upvote\"><span>&#x1F44D;</span></button>"+
                             "</div>"
 							$('#chat-history').append('<div class="chat-message chatbot-message">' + response + buttons + '</div>');
+							// add click event listener to upvote button
+						    $('.upvote-button').click(function() {
+      						  // send AJAX request to Flask endpoint
+        					$.post({
+            					url: '{{ url_for("upvote") }}',
+            					data: {
+                				// include any data you want to send to the Flask endpoint
+            					},
+            					success: function(response) {
+                				// handle response from Flask endpoint (if any)
+            					}
+        						});
+    						});
 							// scroll chat history to the bottom
 							$('#chat-history').scrollTop($('#chat-history')[0].scrollHeight);
+
 						}
 					});
 				}

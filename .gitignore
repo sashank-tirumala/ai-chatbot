@@ -16,3 +16,6 @@ build/
 .DS_STORE
 
 .env
+
+info.json
+queries.sqlite

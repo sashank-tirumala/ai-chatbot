@@ -6,6 +6,7 @@ import logging
 
 app = Flask(__name__)
 bot = ChatBot()
+bot.generate_embeddings()
 logging.basicConfig(level=logging.DEBUG)
 
 @app.route('/')

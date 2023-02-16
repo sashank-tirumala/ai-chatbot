@@ -4,21 +4,30 @@ import os
 import json
 import pandas as pd
 import numpy as np
+import logging
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
+logging.basicConfig(level=logging.DEBUG)
+
+
 class ChatBot():
-    def __init__(self, model="text-davinci-003", temperature=0.0, database_name="queries.sqlite"):
+    def __init__(self, model="text-davinci-003", temperature=0.0, database_name="queries.sqlite", context_data_file = "data.txt"):
         self.model = model
         self.temp = temperature
         self.db = SqliteDict(database_name)
         with open('info.json') as f:
             self.info = json.load(f)
         self.embed_model = 'text-embedding-ada-002' 
+        self.context_data_file = context_data_file
         self.curr_ques = None
         self.curr_response = None
+        self.maxwords = 50 #Can change as required
 
     def get_response(self, ques):
         if ques in self.db:
             return self.db[ques]
         else:
+            breakpoint()
             new_ques = self.parse_prompt(ques.lower())
             response = openai.Completion.create(
                 model=self.model,
@@ -41,26 +50,39 @@ class ChatBot():
                         model=self.embed_model,
                         input=prompt
                         )['data'][0]['embedding'])
-        final_context = 0
-        max_similarity = -2
+        final_context = ''
+        df = pd.DataFrame(columns=('context', 'similarity'))
         for key, value in self.info.items():
             sim = np.dot(prompt_embed, np.array(value['embeddings']['data'][0]['embedding']))
-            if max_similarity<sim:
-                max_similarity=sim
-                final_context = value['context']
-        final_context=final_context.replace('\n', '')
+            df = df.append({'context': key, 'similarity': sim}, ignore_index=True)
+        df = df.sort_values('similarity', ascending=False)
+        word_counter = 0
+        for row in df.iterrows():
+            word_counter = word_counter + len(row[1]['context'].split(' '))
+            final_context = final_context + row[1]['context']
+            if word_counter> self.maxwords:
+                break
         return final_context+"\n"
 
     def generate_embeddings(self):
-        for key, value in self.info.items():
-            if value["embeddings"]==0:
-                value["embeddings"] = openai.Embedding.create(
+        with open(self.context_data_file, 'r') as f:
+            for line in f.readlines():
+                context = line.strip("\n")
+                if context in self.info:
+                    continue
+                self.info[context] = {}
+                self.info[context]['embeddings']= openai.Embedding.create(
                         model=self.embed_model,
-                        input=value["context"]
+                        input=context.lower()
                         )
+
         with open('info.json', 'w') as fp:
             json.dump(self.info, fp)
-    
+        
+        logging.debug("Completed generating embeddings and wrote to info.json")
+        
+
+
     def commit_response(self):
         self.db[self.curr_ques]=self.curr_response
         self.db.commit()
@@ -70,7 +92,8 @@ class ChatBot():
 if __name__ == "__main__":
     ch = ChatBot()
     breakpoint()
-    ch.get_response()
+    ch.get_response("Which all locations did Sashank intern in?")
+    ch.generate_embeddings()
     pass
 
 

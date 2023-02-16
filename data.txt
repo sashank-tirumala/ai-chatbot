@@ -1,0 +1,26 @@
+Sashank is 24 years old.
+Sashank is a masters student in CMU.
+Sashank is pursuing robotics major in CMU. 
+Sashank's program name is Masters of Science in Robotics.
+Sashank has a GPA of 4.0 in CMU.
+Sashank has taken courses in Deep Learning, Reinforcement Learning and Robot Manipulation at CMU.
+Sashank does research on cloth manipulation. 
+Sashank's research advisor is David Held. 
+Sashank's PhD mentor is Thomas Weng.
+Sashank's Postdoc mentor is Daniel Seita. 
+Sashank published a paper in IROS (International Conference on Intelligent Robots and Systems (IROS)) in 2022.
+Sashank's paper in IROS is titled "Learning to singulate layers of cloth using tactile sensing.
+Sashank's paper in IROS won the best paper award in Deformable object manipulation workshop in IROS. 
+Sashank's paper in IROS was about using touch sensing to improve the ability of robots to grasp cloth. Specifically, using touch sensing improved the success rate of grasping cloth by 70% compared to a vision based sensing modality. The reason this occurs is because cloth is extremely thin to properly localize with a vision sensor but quite easy to do using a tactile sensor. 
+Sashank interned in Tesla Autopilot Fleet Learning team from June 2022 to Sep 2022. This involved two projects, detecting the pose of traffic signs and train a novel neural network to detect far away objects accurately. This involved training large transformers with Python, and making large groundtruth data pipelines with C++. Specifically he trained a model to detect the pose of traffic signs that reduced interventions in the car by 20%. He also worked on a novel neural network architecture that was capable of detecting objects at 4X the distance without regressing on detection of nearby objects. He gained experience in large scale neural net training using slurm, where he trained a model on over 800 GPUs. 
+Sashank did his bachelors in IIT Madras from 2016 to 2021 with a degree in Engineering Design and a specialization in Robotics.
+Sashank interned in Robert Bosch Center for cyber physical systems for 6 months from Dec 2020 to May 2021. Here he worked under the mentorship of professor Shishir Kolathaya and professor Bhardwaj Amrutur. He developed reinforcement learning agents that enabled quadruped robots to walk. This led to 2 publications in Conference on Robot Learning and Human Robot Interaction.
+Sashank was a part of team Anveshak in his undergraduate. This team built a rover that was meant to traverse Mars. This team reached the world finals of the University Rover Challenge organized by the Mars society. 
+Sashank graduated with a 9.0/10.0 GPA in his undergrad, graduating in the top 1% of his cohort. 
+Sashank received multiple awards for highest GPA in multiple years in his undergrad, he also received the FIITJEE scholarship for a top 1% rank in JEE.
+Sashank was born in Ranchi, Jharkhand to Seshu kumar tirumala and Krishna Priya Tirumala. 
+Sashank loves watching cricket, is a big supporter of Sunrisers hyderabad in IPL. He also likes New Zealand and Indias international cricket teams. 
+Sashank likes to play chess, he has an active lichess account under the name of nimharb. 
+Sashank also likes to read. His favourite fantasy series is the first law fantasy series by Joe Abercrombie. 
+Sashank's favourite food is dosa and he likes south indian cuisine the most. 
+Sashank has done 2 internships to date. The locations of where he interned are Tesla and Robert Bosch Center for Cyber Physical Systems in Indian Institute of Science Bangalore.  

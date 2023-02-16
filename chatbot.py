@@ -68,7 +68,6 @@ class ChatBot():
     
 
 if __name__ == "__main__":
-    openai.api_key = "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"
     ch = ChatBot()
     breakpoint()
     ch.get_response()

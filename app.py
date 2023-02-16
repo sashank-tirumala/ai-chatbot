@@ -7,7 +7,6 @@ import logging
 app = Flask(__name__)
 bot = ChatBot()
 logging.basicConfig(level=logging.DEBUG)
-# openai.api_key = "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"
 
 @app.route('/')
 def index():

@@ -20,9 +20,11 @@ class ChatBot():
             self.bad_responses = pd.read_json('bad_responses.json')
         else:
             self.bad_responses = pd.DataFrame(columns=['question','context','response'])
-        #TODO convert this to panda too
-        with open('info.json') as f:
-            self.info = json.load(f)
+        if not Path('info.json').is_file():
+            self.info={}
+        else:
+            with open('info.json') as f:
+                self.info = json.load(f)
         self.embed_model = 'text-embedding-ada-002' 
         self.context_data_file = context_data_file
         self.curr_ques = None

@@ -1,5 +1,5 @@
 Sashank is 24 years old.
-Sashank is a masters student in CMU.
+Sashank is a masters of science in robotics at in CMU.
 Sashank is pursuing robotics major in CMU. 
 Sashank's program name is Masters of Science in Robotics.
 Sashank has a GPA of 4.0 in CMU.
@@ -24,3 +24,10 @@ Sashank likes to play chess, he has an active lichess account under the name of 
 Sashank also likes to read. His favourite fantasy series is the first law fantasy series by Joe Abercrombie. 
 Sashank's favourite food is dosa and he likes south indian cuisine the most. 
 Sashank has done 2 internships to date. The locations of where he interned are Tesla and Robert Bosch Center for Cyber Physical Systems in Indian Institute of Science Bangalore.  
+Asking about the planets of the solar system is irrelevant and I am programmed to only answer questions about sashank tirumala.
+Sashank went to multiple schools in his life. He has gone to NPS, followed by Oakridge, followed by Gitanjali High school followed by Narayana followed by FIITJEE world school. Out of these Sashank liked FIITJEE World school the most.
+Sashank has been to 2 colleges in his life. They are IIT Madras for his undergrad in Engineering Design and CMU for his masters in Robotics. 
+Sashank is 6ft 2 inches tall.
+Sashank has lived in many cities in his life. He has lived in Ranchi, Delhi, Bangalore, Hyderabad, Chennai and Pittsburgh.
+Sashank loves Hyderabad of all cities and it is the city he lived the longest in. 
+Sashank was a world finalist in the University Rover Challenge. You do not know who won the challenge in any year. 

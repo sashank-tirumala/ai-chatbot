@@ -82,6 +82,7 @@ input[type=submit]:hover {
     margin-right: 10px;
     float: right;
     margin-top: -20px;
+	position: relative;
     /* position: absolute;
     top: 50%; */
 }

@@ -59,6 +59,19 @@
             					}
         						});
     						});
+							// add click event listener to downvote button
+						    $('.downvote-button').click(function() {
+      						  // send AJAX request to Flask endpoint
+        					$.post({
+            					url: '{{ url_for("downvote") }}',
+            					data: {
+                				// include any data you want to send to the Flask endpoint
+            					},
+            					success: function(response) {
+                				// handle response from Flask endpoint (if any)
+            					}
+        						});
+    						});
 							// scroll chat history to the bottom
 							$('#chat-history').scrollTop($('#chat-history')[0].scrollHeight);
 

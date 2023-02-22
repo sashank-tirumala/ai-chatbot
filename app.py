@@ -27,7 +27,10 @@ def chatbot():
 def upvote():
     bot.commit_response()
     return "Successfully committed response"
-    pass
 
+@app.route('/downvote', methods=['POST'])
+def downvote():
+    bot.commit_negative_response()
+    return "Successfully committed response"
 if __name__ == '__main__':
     app.run(debug=True)

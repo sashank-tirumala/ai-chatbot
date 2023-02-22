@@ -5,6 +5,7 @@ import json
 import pandas as pd
 import numpy as np
 import logging
+from pathlib import Path
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 logging.basicConfig(level=logging.DEBUG)
@@ -15,6 +16,11 @@ class ChatBot():
         self.model = model
         self.temp = temperature
         self.db = SqliteDict(database_name)
+        if Path('bad_responses.json').is_file():
+            self.bad_responses = pd.read_json('bad_responses.json')
+        else:
+            self.bad_responses = pd.DataFrame(columns=['question','context','response'])
+        #TODO convert this to panda too
         with open('info.json') as f:
             self.info = json.load(f)
         self.embed_model = 'text-embedding-ada-002' 
@@ -27,7 +33,6 @@ class ChatBot():
         if ques in self.db:
             return self.db[ques]
         else:
-            breakpoint()
             new_ques = self.parse_prompt(ques.lower())
             response = openai.Completion.create(
                 model=self.model,
@@ -87,7 +92,23 @@ class ChatBot():
         self.db[self.curr_ques]=self.curr_response
         self.db.commit()
 
+    def commit_negative_response(self):
+        res={}
+        res['question'] = self.curr_ques
+        res['context'] = self.get_context(self.curr_ques.lower())
+        res['response'] = self.curr_response
+        self.bad_responses = self.bad_responses.append(res, ignore_index=True)
+        self.bad_responses.to_json('bad_responses.json')
     
+    def convert_bad_responses_to_string(self, filename):
+        res=''
+        for index, row in self.bad_responses.iterrows():
+            res = res+"Q: "+row['question']+'\n'
+            res = res+"C: "+row['context']+"\n"
+            res = res+"A: "+row['response']+"\n\n"
+        with open(filename, 'a') as f:
+            f.write(res)
+
 
 if __name__ == "__main__":
     ch = ChatBot()

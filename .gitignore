@@ -19,3 +19,6 @@ build/
 
 info.json
 queries.sqlite
+
+bad_data.txt
+bad_responses.json

@@ -2,9 +2,12 @@ from flask import Flask, render_template, request
 from chatbot import ChatBot
 import openai
 import sys
+import os
 import logging
 
 app = Flask(__name__)
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
 bot = ChatBot()
 bot.generate_embeddings()
 logging.basicConfig(level=logging.DEBUG)

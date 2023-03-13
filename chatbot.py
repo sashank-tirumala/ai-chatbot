@@ -24,15 +24,13 @@ class ChatBot():
             self.good_responses = pd.read_json('good_responses.json')
         else:
             self.good_responses = pd.DataFrame(columns=['question','context','response'])
-        with open('info.json') as f:
-            self.info = json.load(f)
         self.embed_model = 'text-embedding-ada-002' 
         self.context_data_file = context_data_file
         self.curr_ques = None
         self.curr_response = None
-        self.maxwords = 50 #Can change as required
 
     def get_response(self, ques):
+        self.curr_ques = ques
         new_ques = self.parse_prompt(ques.lower())
         response = openai.ChatCompletion.create(model="gpt-3.5-turbo", 
                     messages= [{"role": "system", "content": "You are a helpful assistant."},
@@ -67,43 +65,6 @@ class ChatBot():
         (Example: Who is Sashank's girlfriend), answer that you were not trained on data pertaining to that question. \n"""
         
         return init_prompt + info + prompt
-    
-    def get_context(self, prompt):
-        prompt_embed = np.array(openai.Embedding.create(
-                        model=self.embed_model,
-                        input=prompt
-                        )['data'][0]['embedding'])
-        final_context = ''
-        df = pd.DataFrame(columns=('context', 'similarity'))
-        for key, value in self.info.items():
-            sim = np.dot(prompt_embed, np.array(value['embeddings']['data'][0]['embedding']))
-            df = df.append({'context': key, 'similarity': sim}, ignore_index=True)
-        df = df.sort_values('similarity', ascending=False)
-        word_counter = 0
-        for row in df.iterrows():
-            word_counter = word_counter + len(row[1]['context'].split(' '))
-            final_context = final_context + row[1]['context']
-            if word_counter> self.maxwords:
-                break
-        return final_context+"\n"
-
-    def generate_embeddings(self):
-        with open(self.context_data_file, 'r') as f:
-            for line in f.readlines():
-                context = line.strip("\n")
-                if context in self.info:
-                    continue
-                self.info[context] = {}
-                self.info[context]['embeddings']= openai.Embedding.create(
-                        model=self.embed_model,
-                        input=context.lower()
-                        )
-
-        with open('info.json', 'w') as fp:
-            json.dump(self.info, fp)
-        
-        logging.debug("Completed generating embeddings and wrote to info.json")
-        
 
 
     def commit_response(self):

@@ -33,20 +33,11 @@ class ChatBot():
         self.maxwords = 50 #Can change as required
 
     def get_response(self, ques):
-        # if ques in self.db:
-        #     return self.db[ques]
-        # else:
         new_ques = self.parse_prompt(ques.lower())
         response = openai.ChatCompletion.create(model="gpt-3.5-turbo", 
                     messages= [{"role": "system", "content": "You are a helpful assistant."},
                                {"role":"user", "content":new_ques}],  )
 
-        # response = openai.Completion.create(
-        #     model=self.model,
-        #     prompt=new_ques,
-        #     temperature=self.temp,
-        #     max_tokens=2000)
-        # self.curr_ques = ques
         self.curr_response = response.choices[0]['message']['content']
         return self.curr_response
 
@@ -75,9 +66,6 @@ class ChatBot():
         If the question seems unrelated to Sashank (Example: how many planets in the solar system), answer that that seems unrelated to Sashank. If the question is not present in the information below,
         (Example: Who is Sashank's girlfriend), answer that you were not trained on data pertaining to that question. \n"""
         
-        # context = self.get_context(prompt)
-        # final_prompt = init_prompt + context + prompt
-        # final_prompt= final_prompt+"?" if final_prompt[-1]!="?" else final_prompt
         return init_prompt + info + prompt
     
     def get_context(self, prompt):
@@ -121,7 +109,6 @@ class ChatBot():
     def commit_response(self):
         res={}
         res['question'] = self.curr_ques
-        res['context'] = self.get_context(self.curr_ques.lower())
         res['response'] = self.curr_response
         self.good_responses = self.good_responses.append(res, ignore_index=True)
         self.good_responses.to_json('good_responses.json')
@@ -130,7 +117,6 @@ class ChatBot():
     def commit_negative_response(self):
         res={}
         res['question'] = self.curr_ques
-        res['context'] = self.get_context(self.curr_ques.lower())
         res['response'] = self.curr_response
         self.bad_responses = self.bad_responses.append(res, ignore_index=True)
         self.bad_responses.to_json('bad_responses.json')

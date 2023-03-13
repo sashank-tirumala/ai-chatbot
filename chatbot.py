@@ -28,6 +28,7 @@ class ChatBot():
         self.context_data_file = context_data_file
         self.curr_ques = None
         self.curr_response = None
+        self.msg_history = [{"role": "system", "content": "You are a helpful assistant."}]
 
     def get_response(self, ques):
         self.curr_ques = ques
